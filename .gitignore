@@ -1,2 +1,3 @@
 .vscode/
 *.sqbpro
+*.db-journal
