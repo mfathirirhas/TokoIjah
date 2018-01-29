@@ -1,4 +1,4 @@
-package config
+package main
 
 import (
 	"os"
@@ -12,7 +12,7 @@ var (
 	Port = ":8080"
 )
 
-func StartServer() *http.Server {
+func startServer() *http.Server {
     server := &http.Server{Addr: Port}
 
 	log.Printf("Starting server...\n")
@@ -30,7 +30,7 @@ func StartServer() *http.Server {
     return server
 }
 
-func StopServer() {
+func stopServer() {
 	stop := make(chan os.Signal, 1)
 
 	signal.Notify(stop, os.Interrupt)
