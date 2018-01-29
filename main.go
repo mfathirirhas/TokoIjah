@@ -1,16 +1,13 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
+	"github.com/mfathirirhas/TokoIjah/config"
 )
 
-func home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w,"Server started successfully")
-}
-
 func main() {
-	http.HandleFunc("/", home)
-	log.Fatal(http.ListenAndServe(":8080",nil))
+	// StartServer() start the server
+	config.StartServer()
+	
+	// StopServer() detect interruption and stop the server
+	config.StopServer()
 }
