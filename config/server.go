@@ -17,6 +17,7 @@ func StartServer() *http.Server {
 
 	log.Printf("Starting server...\n")
 	if server != nil {
+		Routes()
 		log.Printf("Server is running...\n")
 	}
     go func() {
