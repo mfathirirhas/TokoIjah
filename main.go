@@ -1,13 +1,16 @@
 package main
 
 import (
-	"github.com/mfathirirhas/TokoIjah/config"
+	"github.com/mfathirirhas/TokoIjah/model"
+	"github.com/mfathirirhas/TokoIjah/api"
+)
+
+var (
+	port = ":8080"
 )
 
 func main() {
-	// StartServer() start the server
-	config.StartServer()
-	
-	// StopServer() detect interruption and stop the server
-	config.StopServer()
+	db 		:= model.InitDB()
+	server 	:= api.InitRouter(db)
+	server.Run(port)
 }
