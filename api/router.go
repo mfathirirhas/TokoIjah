@@ -1,7 +1,6 @@
 package api
 
 import (
-	// "net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -29,5 +28,11 @@ func InitRouter(db *model.DB) *gin.Engine {
 
 func setRoutes(db *model.DB, r *gin.Engine) {
 	r.GET("/", home)
+
+	r.POST("/stock", CreateStock(db))
+	r.GET("/stock", GetAllStock(db))
+	r.GET("/stockid/:id", GetStockByID(db))
+	r.GET("/stock/:sku", GetStockBySku(db))
+	r.POST("/stock-update", UpdateStock(db))
 }
 
