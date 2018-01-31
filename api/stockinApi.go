@@ -10,20 +10,42 @@ import (
 	"github.com/mfathirirhas/TokoIjah/domain"
 )
 
-func StoreProduct(db domain.IStockin) gin.HandlerFunc {
+func StoreProduct(db domain.IStockin, dbStock domain.IStock) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
+		var stock domain.Stock
 		var stockin domain.Stockin
+		
 		if gc.BindJSON(&stockin) == nil {
 			stockin.Timestamp = time.Now().String()
 			stockin.Total = stockin.OrderAmount * stockin.BuyingPrice
 			db.StoreProduct(&stockin)
-			gc.JSON(http.StatusOK, gin.H{
-				"status": "true",
-				"message": "Products stored successfully",
-				"id": stockin.ID,
-			})
-			return
+
+			stock = dbStock.GetStockBySku(stockin.Sku)
+			if stock.Sku != "" { // if product already existed, update the amount
+				stock.Amount += stockin.ReceivedAmount
+				updatedStock := dbStock.UpdateStock(stock)
+				gc.JSON(http.StatusOK, gin.H{
+					"status": "true",
+					"message": "Products stored successfully",
+					"id": stockin.ID,
+					"stock": updatedStock.Amount,
+				})
+				return
+			} else { // if never exist before, create new stock
+				stock.Sku = stockin.Sku
+				stock.Name = stockin.Name
+				stock.Amount = stockin.ReceivedAmount
+				dbStock.CreateStock(&stock)
+				gc.JSON(http.StatusOK, gin.H{
+					"status": "true",
+					"message": "New Products stored successfully",
+					"id": stockin.ID,
+					"stock": stock.Amount,
+				})
+				return
+			}
+
 		} else {
 			gc.JSON(http.StatusBadRequest, gin.H{
 				"status": false,
