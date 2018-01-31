@@ -58,5 +58,12 @@ func setRoutes(db *model.DB, r *gin.Engine) {
 	r.GET("/stockvaluebyid/:id", GetStockValueByID(db))
 	r.GET("/stockvaluebysku/:sku", GetStockValuesBySku(db))
 	r.POST("/stockvalueupdate", UpdateStockValue(db))
+
+	// export to csv
+	r.GET("/stockexport", StockExportToCSV(db))
+	r.GET("/stockinexport", StockinExportToCSV(db))
+	r.GET("/stockoutexport", StockoutExportToCSV(db))
+	r.GET("/stockvalueexport", StockvalueExportToCSV(db))
+	r.GET("/salereportexport", SalereportExportToCSV(db))
 }
 

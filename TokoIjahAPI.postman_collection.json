@@ -11,7 +11,8 @@
 			"order": [
 				"b758229c-b165-3b45-f547-d28bcb224f2d",
 				"0a3aa5d6-76ef-c86f-7a2f-3b3cfa93ef48",
-				"81db9adf-43f8-e49f-7c3c-5a406a59f5ad"
+				"81db9adf-43f8-e49f-7c3c-5a406a59f5ad",
+				"8b697a4e-7439-2cdc-179a-67018acbc1c3"
 			],
 			"owner": 0,
 			"folders_order": [],
@@ -27,7 +28,8 @@
 				"c47b4de8-662d-86f7-6290-160761afd129",
 				"15f25772-c801-3f76-96c2-b4d4a51668eb",
 				"19b46681-3edc-257a-456b-8ec979f32be2",
-				"486c2c6c-e91f-c3e3-e287-f881a4ff9bb6"
+				"486c2c6c-e91f-c3e3-e287-f881a4ff9bb6",
+				"b30475e6-e458-02b1-3c51-dbbc17d1d49b"
 			],
 			"owner": 0,
 			"folders_order": [],
@@ -41,7 +43,8 @@
 			"order": [
 				"29e1dd90-1c13-72e7-086d-f5729eec8037",
 				"8e2fc69d-3d26-7d99-6387-c919b1a5cf0a",
-				"42d3485c-01d8-0b73-32d1-72d1ad0f0267"
+				"42d3485c-01d8-0b73-32d1-72d1ad0f0267",
+				"a82ffeec-7a68-be22-632c-7df880e43c66"
 			],
 			"owner": 0,
 			"folders_order": [],
@@ -55,7 +58,8 @@
 			"order": [
 				"d44ab259-754e-f061-1e51-e40867de10d1",
 				"f951fb8a-54c9-7591-14d9-7f67a00f0635",
-				"e741ef25-422c-4a5c-949d-1f0217401be8"
+				"e741ef25-422c-4a5c-949d-1f0217401be8",
+				"db346d93-ac92-ec2f-6f69-de22898f3806"
 			],
 			"owner": 0,
 			"folders_order": [],
@@ -71,7 +75,8 @@
 				"2b3316e3-9446-4a88-9334-d08d9bc2107b",
 				"b7142281-b7fa-f0aa-541f-bde3f9cbfd93",
 				"f49a52f3-e7f6-5a9c-4b32-6b666e3d05de",
-				"e94922d1-fd01-3901-5e68-187cee9bce0a"
+				"e94922d1-fd01-3901-5e68-187cee9bce0a",
+				"5c8d1991-0d0a-2f36-555d-c6b0cd0b6d73"
 			],
 			"owner": 0,
 			"folders_order": [],
@@ -83,8 +88,8 @@
 		"fdbff030-98aa-7e7e-e6a2-bcba1d08ab9a",
 		"c142a7e9-c5ad-0df7-9207-7463e96e805c",
 		"c09d8675-5c7c-3419-1319-5068106f91de",
-		"ff4bceb6-c879-2807-63a3-c07016db8e60",
-		"49d4414d-2bc5-77c9-6d39-9982941b6510"
+		"49d4414d-2bc5-77c9-6d39-9982941b6510",
+		"ff4bceb6-c879-2807-63a3-c07016db8e60"
 	],
 	"timestamp": 1517314438941,
 	"owner": 0,
@@ -274,6 +279,30 @@
 			"rawModeData": "{\n\t\"sku\": \"A-015\",\n\t\"name\": \"Turtle Neck White\",\n\t\"amount\": \"800\"\n}"
 		},
 		{
+			"id": "5c8d1991-0d0a-2f36-555d-c6b0cd0b6d73",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/stockvalueexport",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "GET",
+			"collectionId": "0ae11204-8653-8ab9-37de-86f2152d78d3",
+			"data": null,
+			"dataMode": "params",
+			"name": "StockvalueExport",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1517408368491,
+			"version": 2,
+			"responses": [],
+			"folder": "49d4414d-2bc5-77c9-6d39-9982941b6510",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
 			"id": "81db9adf-43f8-e49f-7c3c-5a406a59f5ad",
 			"headers": "",
 			"headerData": [],
@@ -291,6 +320,30 @@
 			"description": "",
 			"descriptionFormat": "html",
 			"time": 1517373963223,
+			"version": 2,
+			"responses": [],
+			"folder": "ff4bceb6-c879-2807-63a3-c07016db8e60",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
+			"id": "8b697a4e-7439-2cdc-179a-67018acbc1c3",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/salereportexport",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "GET",
+			"collectionId": "0ae11204-8653-8ab9-37de-86f2152d78d3",
+			"data": null,
+			"dataMode": "params",
+			"name": "SalereportExport",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1517408440239,
 			"version": 2,
 			"responses": [],
 			"folder": "ff4bceb6-c879-2807-63a3-c07016db8e60",
@@ -349,11 +402,55 @@
 			"version": 2,
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "98363f90-6496-1a39-df18-842181d21724",
 			"folder": "fdbff030-98aa-7e7e-e6a2-bcba1d08ab9a",
 			"currentHelper": null,
 			"helperAttributes": null,
 			"rawModeData": "{\n\t\"sku\": \"A-005\",\n\t\"name\": \"Polo Shirt Green\",\n\t\"amount\": \"700\"\n}"
+		},
+		{
+			"id": "a82ffeec-7a68-be22-632c-7df880e43c66",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/stockinexport",
+			"queryParams": [],
+			"events": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"auth": null,
+			"time": 1517407716593,
+			"name": "StockinExport",
+			"description": "",
+			"collectionId": "0ae11204-8653-8ab9-37de-86f2152d78d3",
+			"responses": [],
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
+			"id": "b30475e6-e458-02b1-3c51-dbbc17d1d49b",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/stockexport",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "GET",
+			"collectionId": "0ae11204-8653-8ab9-37de-86f2152d78d3",
+			"data": null,
+			"dataMode": "params",
+			"name": "StockExport",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1517406707118,
+			"version": 2,
+			"responses": [],
+			"folder": "fdbff030-98aa-7e7e-e6a2-bcba1d08ab9a",
+			"currentHelper": null,
+			"helperAttributes": null
 		},
 		{
 			"id": "b7142281-b7fa-f0aa-541f-bde3f9cbfd93",
@@ -440,7 +537,6 @@
 			"version": 2,
 			"responses": [],
 			"isFromCollection": true,
-			"collectionRequestId": "c47b4de8-662d-86f7-6290-160761afd129",
 			"folder": "fdbff030-98aa-7e7e-e6a2-bcba1d08ab9a",
 			"currentHelper": null,
 			"helperAttributes": null
@@ -507,6 +603,30 @@
 			"currentHelper": null,
 			"helperAttributes": null,
 			"rawModeData": "{\n\t\"sku\" : \"A-004\",\n\t\"name\" : \"Polo Shirt Blue\",\n\t\"outamount\" : 4,\n\t\"saleprice\" : 20000,\n\t\"note\" : \"beli 4\"\n}"
+		},
+		{
+			"id": "db346d93-ac92-ec2f-6f69-de22898f3806",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/stockoutexport",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "GET",
+			"collectionId": "0ae11204-8653-8ab9-37de-86f2152d78d3",
+			"data": null,
+			"dataMode": "params",
+			"name": "StockoutExport",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1517407756197,
+			"version": 2,
+			"responses": [],
+			"folder": "c09d8675-5c7c-3419-1319-5068106f91de",
+			"currentHelper": null,
+			"helperAttributes": null
 		},
 		{
 			"id": "e741ef25-422c-4a5c-949d-1f0217401be8",

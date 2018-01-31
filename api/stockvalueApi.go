@@ -1,10 +1,11 @@
 package api
 
 import (
-	// "log"
+	"os"
 	"net/http"
-	// "time"
+	"time"
 	"strconv"
+	"encoding/csv"
 	"github.com/gin-gonic/gin"
 	"github.com/mfathirirhas/TokoIjah/domain"
 )
@@ -131,5 +132,56 @@ func UpdateStockValue(db domain.IStockvalue) gin.HandlerFunc {
 			})
 			return
 		}
+	}
+}
+
+func StockvalueExportToCSV(db domain.IStockvalue) gin.HandlerFunc {
+	return func(gc *gin.Context) {
+
+		var allstockvalue []domain.Stockvalue
+		allstockvalue = db.GetAllStockValues()
+
+		csvdata := init2dArray(len(allstockvalue), 10)
+
+		for i:=0; i<len(allstockvalue); i++ {
+			csvdata[i][0] = strconv.Itoa(i+1)
+			csvdata[i][1] = allstockvalue[i].Sku
+			csvdata[i][2] = allstockvalue[i].Name
+			csvdata[i][3] = strconv.Itoa(allstockvalue[i].Amount)
+			csvdata[i][4] = strconv.Itoa(allstockvalue[i].BuyingPrice)
+			csvdata[i][5] = strconv.Itoa(allstockvalue[i].Total)
+		}
+
+		fileName := time.Now().Format("2006-02-01") + "-Stockvalue.csv"
+		file, err := os.Create("./"+fileName)
+		if err != nil {
+			gc.JSON(http.StatusConflict, gin.H{
+				"status": false,
+				"message": "Failed to export file!",
+			})
+			return
+		}
+    	defer file.Close()
+
+    	writer := csv.NewWriter(file)
+    	defer writer.Flush()
+
+    	for _, value := range csvdata {
+        	err := writer.Write(value)
+        	if err != nil {
+				gc.JSON(http.StatusConflict, gin.H{
+					"status": false,
+					"message": "Failed to export file!",
+				})
+				return
+			}
+		}
+		
+		gc.JSON(http.StatusOK, gin.H{
+			"status": true,
+			"message": "Stockvalue data exported to csv successfully!",
+			"filename": fileName,
+		})
+		return
 	}
 }
