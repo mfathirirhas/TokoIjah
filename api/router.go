@@ -29,21 +29,28 @@ func InitRouter(db *model.DB) *gin.Engine {
 func setRoutes(db *model.DB, r *gin.Engine) {
 	r.GET("/", home)
 
-	// stock table
+	// stock apis
 	r.POST("/stock", CreateStock(db))
 	r.GET("/stock", GetAllStock(db))
 	r.GET("/stockid/:id", GetStockByID(db))
 	r.GET("/stock/:sku", GetStockBySku(db))
 	r.POST("/stock-update", UpdateStock(db))
 
-	// stockin table
+	// stockin apis
 	r.POST("/stockin", StoreProduct(db))
 	r.GET("/stockin", GetAllStoredProducts(db))
 	r.GET("/stockinbysku/:sku", GetStoredProductsBySku(db))
 
-	// stockout table
+	// stockout apis
 	r.POST("/stockout", RemoveProduct(db))
 	r.GET("/stockout", GetAllOutProducts(db))
 	r.GET("/stockoutbysku/:sku", GetOutProductsBySku(db))
+
+
+	// salereport apis
+	r.POST("/salereport", CreateSaleReport(db))
+	r.GET("/salereport", GetAllSaleReports(db))
+	r.GET("/salereportbysku/:sku", GetSaleReportsBySKU(db))
+
 }
 
