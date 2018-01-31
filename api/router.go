@@ -32,9 +32,9 @@ func setRoutes(db *model.DB, r *gin.Engine) {
 	// stock apis
 	r.POST("/stock", CreateStock(db))
 	r.GET("/stock", GetAllStock(db))
-	r.GET("/stockid/:id", GetStockByID(db))
-	r.GET("/stock/:sku", GetStockBySku(db))
-	r.POST("/stock-update", UpdateStock(db))
+	r.GET("/stockbyid/:id", GetStockByID(db))
+	r.GET("/stockbysku/:sku", GetStockBySku(db))
+	r.POST("/stockupdate", UpdateStock(db))
 
 	// stockin apis
 	r.POST("/stockin", StoreProduct(db))
@@ -52,5 +52,11 @@ func setRoutes(db *model.DB, r *gin.Engine) {
 	r.GET("/salereport", GetAllSaleReports(db))
 	r.GET("/salereportbysku/:sku", GetSaleReportsBySKU(db))
 
+	// stockvalue apis
+	r.POST("/stockvalue", CreateStockValue(db))
+	r.GET("/stockvalue", GetAllStockValues(db))
+	r.GET("/stockvaluebyid/:id", GetStockValueByID(db))
+	r.GET("/stockvaluebysku/:sku", GetStockValuesBySku(db))
+	r.POST("/stockvalueupdate", UpdateStockValue(db))
 }
 

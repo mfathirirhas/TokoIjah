@@ -23,7 +23,7 @@ func InitDB() *DB {
 		log.Fatal("failed to initialize database: ",err)
 	}
 
-	db.AutoMigrate(&domain.Stock{}, &domain.Stockin{}, &domain.Stockout{}, &domain.Salereport{})
+	db.AutoMigrate(&domain.Stock{}, &domain.Stockin{}, &domain.Stockout{}, &domain.Salereport{}, &domain.Stockvalue{})
 
 	return &DB{db}
 }
