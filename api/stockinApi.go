@@ -100,8 +100,8 @@ func StockinExportToCSV(db domain.IStockin) gin.HandlerFunc {
 			csvdata[i][9] = allstockin[i].Note
 		}
 
-		fileName := time.Now().Format("2006-02-01") + "-Stockin.csv"
-		file, err := os.Create("./"+fileName)
+		fileName := time.Now().Format("2006-01-02") + "-Stockin.csv"
+		file, err := os.Create("./csv/"+fileName)
 		if err != nil {
 			gc.JSON(http.StatusConflict, gin.H{
 				"status": false,
