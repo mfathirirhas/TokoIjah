@@ -10,20 +10,36 @@ import (
 	"github.com/mfathirirhas/TokoIjah/domain"
 )
 
-func RemoveProduct(db domain.IStockout) gin.HandlerFunc {
+func RemoveProduct(db domain.IStockout, dbStock domain.IStock) gin.HandlerFunc {
 	return func(gc *gin.Context){
 
+		var stock domain.Stock
 		var stockout domain.Stockout
+
 		if gc.BindJSON(&stockout) == nil {
 			stockout.Timestamp = time.Now().String()
 			stockout.Total = stockout.OutAmount * stockout.SalePrice
-			db.RemoveProduct(&stockout)
-			gc.JSON(http.StatusOK, gin.H{
-				"status": "true",
-				"message": "Products stored successfully",
-				"id": stockout.ID,
-			})
-			return
+			
+			stock = dbStock.GetStockBySku(stockout.Sku)
+			if stock.Sku != "" { // if already existed before, update the stock
+				db.RemoveProduct(&stockout)
+				stock.Amount -= stockout.OutAmount
+				updatedStock := dbStock.UpdateStock(stock)
+				gc.JSON(http.StatusOK, gin.H{
+					"status": "true",
+					"message": "Products removed successfully",
+					"id": stockout.ID,
+					"stock": updatedStock.Amount,
+				})
+				return
+			} else { // if never exist before, then this product was never in stock before
+				gc.JSON(http.StatusBadRequest, gin.H{
+					"status": "false",
+					"message": "Products were never in stock before!",
+				})
+				return
+			}
+			
 		} else {
 			gc.JSON(http.StatusBadRequest, gin.H{
 				"status": false,

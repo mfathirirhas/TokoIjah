@@ -42,7 +42,7 @@ func setRoutes(db *model.DB, r *gin.Engine) {
 	r.GET("/stockinbysku/:sku", GetStoredProductsBySku(db))
 
 	// stockout apis
-	r.POST("/stockout", RemoveProduct(db))
+	r.POST("/stockout", RemoveProduct(db,db))
 	r.GET("/stockout", GetAllOutProducts(db))
 	r.GET("/stockoutbysku/:sku", GetOutProductsBySku(db))
 
