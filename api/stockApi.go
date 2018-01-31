@@ -144,7 +144,7 @@ func StockExportToCSV(db domain.IStock) gin.HandlerFunc {
 			csvdata[i][0] = strconv.Itoa(i+1)
 			csvdata[i][1] = allstock[i].Sku
 			csvdata[i][2] = allstock[i].Name
-			csvdata[i][3] = allstock[i].Amount
+			csvdata[i][3] = strconv.Itoa(allstock[i].Amount)
 		}
 
 		fileName := time.Now().Format("2006-02-01") + "-Stock.csv"
