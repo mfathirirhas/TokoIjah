@@ -152,8 +152,8 @@ func StockvalueExportToCSV(db domain.IStockvalue) gin.HandlerFunc {
 			csvdata[i][5] = strconv.Itoa(allstockvalue[i].Total)
 		}
 
-		fileName := time.Now().Format("2006-02-01") + "-Stockvalue.csv"
-		file, err := os.Create("./"+fileName)
+		fileName := time.Now().Format("2006-01-02") + "-Stockvalue.csv"
+		file, err := os.Create("./csv/"+fileName)
 		if err != nil {
 			gc.JSON(http.StatusConflict, gin.H{
 				"status": false,

@@ -144,11 +144,11 @@ func StockExportToCSV(db domain.IStock) gin.HandlerFunc {
 			csvdata[i][0] = strconv.Itoa(i+1)
 			csvdata[i][1] = allstock[i].Sku
 			csvdata[i][2] = allstock[i].Name
-			csvdata[i][3] = allstock[i].Amount
+			csvdata[i][3] = strconv.Itoa(allstock[i].Amount)
 		}
 
-		fileName := time.Now().Format("2006-02-01") + "-Stock.csv"
-		file, err := os.Create("./"+fileName)
+		fileName := time.Now().Format("2006-01-02") + "-Stock.csv"
+		file, err := os.Create("./csv/"+fileName)
 		if err != nil {
 			gc.JSON(http.StatusConflict, gin.H{
 				"status": false,
