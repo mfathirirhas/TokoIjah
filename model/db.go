@@ -3,13 +3,13 @@ package model
 import (
 	"log"
 	"github.com/jinzhu/gorm"
-	// "github.com/mfathirirhas/TokoIjah/domain"
+	"github.com/mfathirirhas/TokoIjah/domain"
 	_ "github.com/mattn/go-sqlite3"
 )
 
 var (
 	dbEngine	= "sqlite3"
-	dbName		= "tokoijah.db"
+	dbName		= "./tokoijah.db"
 )
 
 type DB struct {
@@ -23,7 +23,7 @@ func InitDB() *DB {
 		log.Fatal("failed to initialize database: ",err)
 	}
 
-	db.AutoMigrate()
+	db.AutoMigrate(&domain.Stock{}, &domain.Stockin{}, &domain.Stockout{}, &domain.Salereport{}, &domain.Stockvalue{})
 
 	return &DB{db}
 }
