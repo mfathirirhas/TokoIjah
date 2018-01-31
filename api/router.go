@@ -62,5 +62,6 @@ func setRoutes(db *model.DB, r *gin.Engine) {
 	// export to csv
 	r.GET("/stockexport", StockExportToCSV(db))
 	r.GET("/stockinexport", StockinExportToCSV(db))
+	r.GET("/stockoutexport", StockoutExportToCSV(db))
 }
 
