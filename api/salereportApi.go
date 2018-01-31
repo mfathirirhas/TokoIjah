@@ -1,8 +1,11 @@
 package api
 
 import (
+	"os"
 	"net/http"
 	"time"
+	"strconv"
+	"encoding/csv"
 	"github.com/gin-gonic/gin"
 	"github.com/mfathirirhas/TokoIjah/domain"
 )
@@ -74,5 +77,60 @@ func GetSaleReportsBySKU(db domain.ISalereport) gin.HandlerFunc {
 			})
 			return
 		}
+	}
+}
+
+func SalereportExportToCSV(db domain.ISalereport) gin.HandlerFunc {
+	return func(gc *gin.Context) {
+
+		var allsalereport []domain.Salereport
+		allsalereport = db.GetAllSaleReports()
+
+		csvdata := init2dArray(len(allsalereport), 10)
+
+		for i:=0; i<len(allsalereport); i++ {
+			csvdata[i][0] = strconv.Itoa(i+1)
+			csvdata[i][1] = allsalereport[i].OrderID
+			csvdata[i][2] = allsalereport[i].Timestamp
+			csvdata[i][3] = allsalereport[i].Sku
+			csvdata[i][4] = allsalereport[i].Name
+			csvdata[i][5] = strconv.Itoa(allsalereport[i].Amount)
+			csvdata[i][6] = strconv.Itoa(allsalereport[i].Saleprice)
+			csvdata[i][7] = strconv.Itoa(allsalereport[i].Total)
+			csvdata[i][8] = strconv.Itoa(allsalereport[i].Buyingprice)
+			csvdata[i][9] = strconv.Itoa(allsalereport[i].Profit)
+		}
+
+		fileName := time.Now().Format("2006-02-01") + "-Salereport.csv"
+		file, err := os.Create("./"+fileName)
+		if err != nil {
+			gc.JSON(http.StatusConflict, gin.H{
+				"status": false,
+				"message": "Failed to export file!",
+			})
+			return
+		}
+    	defer file.Close()
+
+    	writer := csv.NewWriter(file)
+    	defer writer.Flush()
+
+    	for _, value := range csvdata {
+        	err := writer.Write(value)
+        	if err != nil {
+				gc.JSON(http.StatusConflict, gin.H{
+					"status": false,
+					"message": "Failed to export file!",
+				})
+				return
+			}
+		}
+		
+		gc.JSON(http.StatusOK, gin.H{
+			"status": true,
+			"message": "Salereport data exported to csv successfully!",
+			"filename": fileName,
+		})
+		return
 	}
 }
