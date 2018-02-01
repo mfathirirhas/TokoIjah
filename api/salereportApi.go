@@ -6,9 +6,16 @@ import (
 	"time"
 	"strconv"
 	"encoding/csv"
+	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/mfathirirhas/TokoIjah/domain"
 )
+
+type SaleReportReqBody struct {
+	From		string	`json:"datefrom"`
+	To			string	`json:"dateto"`
+	Csvexport	string	`json:"exportcsv"`
+}
 
 func CreateSaleReport(db domain.ISalereport, dbstockvalue domain.IStockvalue) gin.HandlerFunc {
 	return func(gc *gin.Context) {
@@ -151,10 +158,24 @@ func SalereportExportToCSV(db domain.ISalereport) gin.HandlerFunc {
 func GetSaleReportsByDate(db domain.ISalereport) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
+		var reqBody SaleReportReqBody
+		var from string
+		var to string
+		var csvexport string
+		decoder := json.NewDecoder(gc.Request.Body)
+		err := decoder.Decode(&reqBody)
+		from = reqBody.From
+		to = reqBody.To
+		csvexport = reqBody.Csvexport
+		if err != nil {	
+			from = "undefined"
+			to = "undefined"
+		}
+
 		var salereports []domain.Salereport
-		salereports = db.GetSaleReportsByDate(gc.PostForm("datefrom"), gc.PostForm("dateto"))
+		salereports = db.GetSaleReportsByDate(from, to)
 		if len(salereports) > 0 {
-			if gc.PostForm("exportcsv") == "1" {
+			if csvexport == "1" {
 				// export to csv
 				csvdata := init2dArray(len(salereports), 10)
 				for i:=0; i<len(salereports); i++ {
@@ -170,7 +191,7 @@ func GetSaleReportsByDate(db domain.ISalereport) gin.HandlerFunc {
 					csvdata[i][9] = strconv.Itoa(salereports[i].Profit)
 				}
 
-				fileName := time.Now().Format("2006-01-02") + "-Salereport_"+gc.PostForm("datefrom")+"---"+ gc.PostForm("dateto")+".csv"
+				fileName := time.Now().Format("2006-01-02") + "-Salereport_"+ dateOnlyFormat(from) +"_"+ dateOnlyFormat(to) +".csv"
 				file, err := os.Create("./csv/"+fileName)
 				if err != nil {
 					gc.JSON(http.StatusConflict, gin.H{
@@ -216,10 +237,11 @@ func GetSaleReportsByDate(db domain.ISalereport) gin.HandlerFunc {
 					}
 					totalproducts += salereports[i].Amount
 				}
+
 				gc.JSON(http.StatusOK, gin.H{
 					"status": true,
 					"datereport": time.Now().Format("2006-01-02"),
-					"daterange": gc.PostForm("datefrom") + " - " + gc.PostForm("dateto"),
+					"daterange": from + " - " + to,
 					"omzet": omzet,
 					"grossprofit": grossprofit,
 					"totalsale": totalsale,
@@ -244,4 +266,9 @@ func GetSaleReportsByDate(db domain.ISalereport) gin.HandlerFunc {
 		})
 		return
 	}
+}
+
+func dateOnlyFormat(t string) string {
+    runes := []rune(t)
+    return string(runes[0:10])
 }
