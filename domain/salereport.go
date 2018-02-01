@@ -6,8 +6,8 @@ import (
 
 type Salereport struct {
 	ID				int		`gorm:"primary_key;AUTO_INCREMENT" json:"-"`
-	OrderID			string	`gorm:"not null" json:"orderid"`
-	Timestamp		string	`gorm:"not null" json:"timestamp"`
+	OrderID			string	`json:"orderid"`
+	Timestamp		string	`json:"timestamp"`
 	Sku				string	`json:"sku"`
 	Name			string	`json:"name"`
 	Amount			int		`json:"amount"`
