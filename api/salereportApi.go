@@ -10,19 +10,32 @@ import (
 	"github.com/mfathirirhas/TokoIjah/domain"
 )
 
-func CreateSaleReport(db domain.ISalereport) gin.HandlerFunc {
+func CreateSaleReport(db domain.ISalereport, dbstockvalue domain.IStockvalue) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
 		var salereport domain.Salereport
+		var stockvalue domain.Stockvalue
+
 		if gc.BindJSON(&salereport) == nil {
 			salereport.Timestamp = time.Now().Format("2006-01-02 15:04:05")
+			stockvalue = dbstockvalue.GetStockValuesBySku(salereport.Sku)
+			if stockvalue.Sku != "" {
+				salereport.Buyingprice = stockvalue.BuyingPrice	
+			} else {
+				gc.JSON(http.StatusBadRequest, gin.H{
+					"status": false,
+					"message": "There is no such product in stockvalue!",
+				})
+				return
+			}
 			salereport.Total = (salereport.Amount * salereport.Saleprice)
 			salereport.Profit = (salereport.Amount * salereport.Saleprice) - (salereport.Amount * salereport.Buyingprice)
 			db.CreateSaleReport(&salereport)
 			gc.JSON(http.StatusOK, gin.H{
-				"status": "true",
-				"message": "Sale report created successfully!",
+				"status": true,
+				"message": "Sale report is created successfully!",
 				"id": salereport.ID,
+				"sale": salereport,
 			})
 			return
 		} else {
