@@ -21,4 +21,5 @@ type ISalereport interface {
 	CreateSaleReport(*Salereport)
 	GetAllSaleReports() []Salereport
 	GetSaleReportsBySKU(string) []Salereport
+	GetSaleReportsByDate(string, string) []Salereport
 }
