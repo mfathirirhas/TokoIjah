@@ -12,7 +12,8 @@
 				"b758229c-b165-3b45-f547-d28bcb224f2d",
 				"0a3aa5d6-76ef-c86f-7a2f-3b3cfa93ef48",
 				"81db9adf-43f8-e49f-7c3c-5a406a59f5ad",
-				"8b697a4e-7439-2cdc-179a-67018acbc1c3"
+				"8b697a4e-7439-2cdc-179a-67018acbc1c3",
+				"d0af1ec4-7645-9274-4ea9-270480149422"
 			],
 			"owner": 0,
 			"folders_order": [],
@@ -592,6 +593,38 @@
 			"currentHelper": null,
 			"helperAttributes": null,
 			"rawModeData": "{\n\t\"sku\": \"A-001\",\n\t\"name\": \"Polo Shirt Black\",\n\t\"amount\": 50,\n\t\"buyingprice\": 200000\n}"
+		},
+		{
+			"id": "d0af1ec4-7645-9274-4ea9-270480149422",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "localhost:8080/generatesalereport",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "POST",
+			"collectionId": "0ae11204-8653-8ab9-37de-86f2152d78d3",
+			"data": [],
+			"dataMode": "raw",
+			"name": "GenerateSaleReport",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1517502349388,
+			"version": 2,
+			"responses": [],
+			"folder": "ff4bceb6-c879-2807-63a3-c07016db8e60",
+			"currentHelper": null,
+			"helperAttributes": null,
+			"rawModeData": "{\n\t\"datefrom\": \"2018-02-01 00:00:00\",\n\t\"dateto\": \"2018-02-01 23:59:59\",\n\t\"exportcsv\": \"0\" \n}"
 		},
 		{
 			"id": "d44ab259-754e-f061-1e51-e40867de10d1",
