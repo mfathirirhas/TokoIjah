@@ -48,7 +48,7 @@ func setRoutes(db *model.DB, r *gin.Engine) {
 
 
 	// salereport apis
-	r.POST("/salereport", CreateSaleReport(db))
+	r.POST("/salereport", CreateSaleReport(db,db))
 	r.GET("/salereport", GetAllSaleReports(db))
 	r.GET("/salereportbysku/:sku", GetSaleReportsBySKU(db))
 
