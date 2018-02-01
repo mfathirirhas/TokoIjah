@@ -17,7 +17,7 @@ func RemoveProduct(db domain.IStockout, dbStock domain.IStock) gin.HandlerFunc {
 		var stockout domain.Stockout
 
 		if gc.BindJSON(&stockout) == nil {
-			stockout.Timestamp = time.Now().String()
+			stockout.Timestamp = time.Now().Format("2006-01-02 15:04:05")
 			stockout.Total = stockout.OutAmount * stockout.SalePrice
 			
 			stock = dbStock.GetStockBySku(stockout.Sku)

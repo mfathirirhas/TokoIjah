@@ -17,7 +17,7 @@ func StoreProduct(db domain.IStockin, dbStock domain.IStock) gin.HandlerFunc {
 		var stockin domain.Stockin
 		
 		if gc.BindJSON(&stockin) == nil {
-			stockin.Timestamp = time.Now().String()
+			stockin.Timestamp = time.Now().Format("2006-01-02 15:04:05")
 			stockin.Total = stockin.OrderAmount * stockin.BuyingPrice
 			db.StoreProduct(&stockin)
 
