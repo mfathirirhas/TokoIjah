@@ -15,7 +15,7 @@ func CreateSaleReport(db domain.ISalereport) gin.HandlerFunc {
 
 		var salereport domain.Salereport
 		if gc.BindJSON(&salereport) == nil {
-			salereport.Timestamp = time.Now().String()
+			salereport.Timestamp = time.Now().Format("2006-01-02 15:04:05")
 			salereport.Total = (salereport.Amount * salereport.Saleprice)
 			salereport.Profit = (salereport.Amount * salereport.Saleprice) - (salereport.Amount * salereport.Buyingprice)
 			db.CreateSaleReport(&salereport)
