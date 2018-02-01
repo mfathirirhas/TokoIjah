@@ -9,7 +9,7 @@ import (
 
 var (
 	dbEngine	= "sqlite3"
-	dbName		= "./tokoijah_dev.db"
+	dbName		= "./test.db"
 )
 
 type DB struct {
