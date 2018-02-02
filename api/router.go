@@ -8,7 +8,7 @@ import (
 	"github.com/mfathirirhas/TokoIjah/model"
 )
 
-
+// InitRouter set configs for gin engine router and set the APIs routes
 func InitRouter(db *model.DB) *gin.Engine {
 	router := gin.Default()
 	router.Use(cors.Middleware(cors.Config{
