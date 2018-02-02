@@ -12,6 +12,7 @@ import (
 	"github.com/mfathirirhas/TokoIjah/domain"
 )
 
+// CreateStock create one instance of stock data and save it to stocks table
 func CreateStock(db domain.IStock) gin.HandlerFunc{
 	return func(gc *gin.Context) {
 
@@ -35,6 +36,7 @@ func CreateStock(db domain.IStock) gin.HandlerFunc{
 	}
 }
 
+// GetAllStock get all rows of stocks from stocks table
 func GetAllStock(db domain.IStock) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -58,6 +60,7 @@ func GetAllStock(db domain.IStock) gin.HandlerFunc {
 	}
 }
 
+// GetStockByID get stock data by id
 func GetStockByID(db domain.IStock) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -88,6 +91,7 @@ func GetStockByID(db domain.IStock) gin.HandlerFunc {
 	}
 }
 
+// GetStockBySku get stock data by sku
 func GetStockBySku(db domain.IStock) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -109,6 +113,7 @@ func GetStockBySku(db domain.IStock) gin.HandlerFunc {
 	}
 }
 
+// UpdateStock update already existing stock data
 func UpdateStock(db domain.IStock) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -134,6 +139,7 @@ func UpdateStock(db domain.IStock) gin.HandlerFunc {
 	}
 }
 
+// StockExportToCSV export all stock data from stocks table
 func StockExportToCSV(db domain.IStock) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -183,6 +189,7 @@ func StockExportToCSV(db domain.IStock) gin.HandlerFunc {
 	}
 }
 
+// StockImportCSV import csv data into stocks table
 func StockImportCSV(db domain.IStock) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
