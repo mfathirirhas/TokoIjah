@@ -12,6 +12,7 @@ import (
 	"github.com/mfathirirhas/TokoIjah/domain"
 )
 
+// RemoveProduct make note for products coming out from stock
 func RemoveProduct(db domain.IStockout, dbStock domain.IStock) gin.HandlerFunc {
 	return func(gc *gin.Context){
 
@@ -53,6 +54,7 @@ func RemoveProduct(db domain.IStockout, dbStock domain.IStock) gin.HandlerFunc {
 	}
 }
 
+// GetAllOutProducts get all records of products coming out from stock
 func GetAllOutProducts(db domain.IStockout) gin.HandlerFunc {
 	return func(gc *gin.Context){
 
@@ -76,6 +78,7 @@ func GetAllOutProducts(db domain.IStockout) gin.HandlerFunc {
 	}
 }
 
+// GetOutProductsBySku get products coming out from stock by sku
 func GetOutProductsBySku(db domain.IStockout) gin.HandlerFunc {
 	return func(gc *gin.Context){
 
@@ -97,6 +100,7 @@ func GetOutProductsBySku(db domain.IStockout) gin.HandlerFunc {
 	}
 }
 
+// StockoutExportToCSV export all records data into csv file
 func StockoutExportToCSV(db domain.IStockout) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -150,6 +154,7 @@ func StockoutExportToCSV(db domain.IStockout) gin.HandlerFunc {
 	}
 }
 
+// StockoutImportCSV import csv data into stockout table
 func StockoutImportCSV(db domain.IStockout) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 

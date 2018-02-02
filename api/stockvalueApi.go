@@ -14,6 +14,7 @@ import (
 	"github.com/mfathirirhas/TokoIjah/domain"
 )
 
+// CreateStockValue create one instance of stock value into stockvalues table
 func CreateStockValue(db domain.IStockvalue) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -38,6 +39,7 @@ func CreateStockValue(db domain.IStockvalue) gin.HandlerFunc {
 	}
 }
 
+// GetAllStockValues get all records from stockvalues table
 func GetAllStockValues(db domain.IStockvalue) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 		
@@ -61,6 +63,7 @@ func GetAllStockValues(db domain.IStockvalue) gin.HandlerFunc {
 	}
 }
 
+// GetStockValueByID get a stockvalue data by id
 func GetStockValueByID(db domain.IStockvalue) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 		
@@ -90,7 +93,7 @@ func GetStockValueByID(db domain.IStockvalue) gin.HandlerFunc {
 	}
 }
 
-
+// GetStockValuesBySku get a stock value data by sku
 func GetStockValuesBySku(db domain.IStockvalue) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 		
@@ -112,6 +115,7 @@ func GetStockValuesBySku(db domain.IStockvalue) gin.HandlerFunc {
 	}
 }
 
+// UpdateStockValue update an already existing stock value data 
 func UpdateStockValue(db domain.IStockvalue) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 		
@@ -139,6 +143,7 @@ func UpdateStockValue(db domain.IStockvalue) gin.HandlerFunc {
 	}
 }
 
+// StockvalueExportToCSV export all records from stockvalues table
 func StockvalueExportToCSV(db domain.IStockvalue) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -190,6 +195,7 @@ func StockvalueExportToCSV(db domain.IStockvalue) gin.HandlerFunc {
 	}
 }
 
+// GenerateStockValue generate report from stock value in form of json data or csv
 func GenerateStockValue(db domain.IStockvalue, dbstock domain.IStock, dbstockin domain.IStockin) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -268,6 +274,7 @@ func GenerateStockValue(db domain.IStockvalue, dbstock domain.IStock, dbstockin 
 	}
 }
 
+// StockvalueImportCSV import csv data into stockvalues table
 func StockvalueImportCSV(db domain.IStockvalue) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 

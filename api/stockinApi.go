@@ -12,6 +12,7 @@ import (
 	"github.com/mfathirirhas/TokoIjah/domain"
 )
 
+// StoreProduct make note for new products imported into stock
 func StoreProduct(db domain.IStockin, dbStock domain.IStock) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -59,6 +60,7 @@ func StoreProduct(db domain.IStockin, dbStock domain.IStock) gin.HandlerFunc {
 	}
 }
 
+// GetAllStoredProducts get all data records from stockin table 
 func GetAllStoredProducts(db domain.IStockin) gin.HandlerFunc {
 	return func(gc *gin.Context){
 
@@ -82,6 +84,7 @@ func GetAllStoredProducts(db domain.IStockin) gin.HandlerFunc {
 	}
 }
 
+// GetStoredProductsBySku get records data by sku
 func GetStoredProductsBySku(db domain.IStockin) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 		
@@ -103,6 +106,7 @@ func GetStoredProductsBySku(db domain.IStockin) gin.HandlerFunc {
 	}
 }
 
+// StockinExportToCSV export all records from stockins table into csv file
 func StockinExportToCSV(db domain.IStockin) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -158,6 +162,7 @@ func StockinExportToCSV(db domain.IStockin) gin.HandlerFunc {
 	}
 }
 
+// StockinImportCSV import csv data into stockins table
 func StockinImportCSV(db domain.IStockin) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 

@@ -13,12 +13,14 @@ import (
 	"github.com/mfathirirhas/TokoIjah/domain"
 )
 
+// SaleReportReqBody data structure for generate salereport json req body
 type SaleReportReqBody struct {
 	From		string	`json:"datefrom"`
 	To			string	`json:"dateto"`
 	Csvexport	string	`json:"exportcsv"`
 }
 
+// CreateSaleReport API to create one sale report instance and save it to salereports table
 func CreateSaleReport(db domain.ISalereport, dbstockvalue domain.IStockvalue) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -58,6 +60,7 @@ func CreateSaleReport(db domain.ISalereport, dbstockvalue domain.IStockvalue) gi
 	}
 }
 
+// GetAllSaleReports get all rows of salereports from salereports table
 func GetAllSaleReports(db domain.ISalereport) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 		
@@ -81,6 +84,7 @@ func GetAllSaleReports(db domain.ISalereport) gin.HandlerFunc {
 	}
 }
 
+// GetSaleReportsBySKU get salereports by sku
 func GetSaleReportsBySKU(db domain.ISalereport) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 		
@@ -102,6 +106,7 @@ func GetSaleReportsBySKU(db domain.ISalereport) gin.HandlerFunc {
 	}
 }
 
+// SalereportExportToCSV export salereports data into csv file
 func SalereportExportToCSV(db domain.ISalereport) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -157,6 +162,7 @@ func SalereportExportToCSV(db domain.ISalereport) gin.HandlerFunc {
 	}
 }
 
+// GetSaleReportsByDate get salereports by range of date(timestamp)
 func GetSaleReportsByDate(db domain.ISalereport) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
@@ -270,6 +276,7 @@ func GetSaleReportsByDate(db domain.ISalereport) gin.HandlerFunc {
 	}
 }
 
+// SalereportImportCSV import csv data into salereports table
 func SalereportImportCSV(db domain.ISalereport) gin.HandlerFunc {
 	return func(gc *gin.Context) {
 
