@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"time"
 	"strconv"
+	"io"
+	"bufio"
 	"encoding/csv"
 	"github.com/gin-gonic/gin"
 	"github.com/mfathirirhas/TokoIjah/domain"
@@ -153,5 +155,81 @@ func StockinExportToCSV(db domain.IStockin) gin.HandlerFunc {
 			"filename": fileName,
 		})
 		return
+	}
+}
+
+func StockinImportCSV(db domain.IStockin) gin.HandlerFunc {
+	return func(gc *gin.Context) {
+
+		var stockin []domain.Stockin
+
+		file, _ := gc.FormFile("stockinimport")
+		dst := "./csv/"+ file.Filename
+		gc.SaveUploadedFile(file, dst)
+		// csvfile, err := os.Open("./csv/import_stock.csv")
+		csvfile, err := os.Open("./csv/"+file.Filename)
+		if err != nil {
+			gc.JSON(http.StatusBadRequest, gin.H{
+				"status": false,
+				"message": "error opening file, check file again",
+			})
+		}
+
+
+		reader := csv.NewReader(bufio.NewReader(csvfile))
+		for {
+			line, error := reader.Read()
+			if error == io.EOF {
+				break
+			} else if error != nil {
+				gc.JSON(http.StatusBadRequest, gin.H{
+					"status": false,
+					"message": "something's wrong!",
+				})
+			}
+
+			stockinorderamount, _ := strconv.Atoi(line[4])
+			stockinreceivedamount, _ := strconv.Atoi(line[5])    
+    		stockinbuyingprice, _ := strconv.Atoi(line[6])
+    		stockintotal, _ := strconv.Atoi(line[7])
+			stockin = append(stockin, domain.Stockin{
+				Timestamp: line[1],  // start from timestamp column as we ignore id column(assume the csv include the IDs)
+				Sku: line[2],
+				Name: line[3],
+				OrderAmount: stockinorderamount,
+				ReceivedAmount: stockinreceivedamount,
+				BuyingPrice: stockinbuyingprice,
+				Total: stockintotal,
+				Receipt: line[8],
+				Note: line[9],
+			})
+		}
+
+		if len(stockin) > 0 {
+			for i:=0; i<len(stockin); i++ {
+				db.StoreProduct(&stockin[i])
+			}
+			gc.JSON(http.StatusOK, gin.H{
+				"status": true,
+				"message": "data csv migrated successfully to stock table",
+				"data": stockin,
+			})
+			return
+
+		} else {
+			gc.JSON(http.StatusBadRequest, gin.H{
+				"status": false,
+				"message": "error reading csv file, check file again for correct format!",
+			})
+			return
+
+		}
+
+		gc.JSON(http.StatusBadRequest, gin.H{
+			"status": false,
+			"message": "something's wrong!",
+		})
+		return
+
 	}
 }
