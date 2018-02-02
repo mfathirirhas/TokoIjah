@@ -4,6 +4,8 @@ import (
 	"os"
 	"net/http"
 	"time"
+	"io"
+	"bufio"
 	"strconv"
 	"encoding/csv"
 	"github.com/gin-gonic/gin"
@@ -145,5 +147,78 @@ func StockoutExportToCSV(db domain.IStockout) gin.HandlerFunc {
 			"filename": fileName,
 		})
 		return
+	}
+}
+
+func StockoutImportCSV(db domain.IStockout) gin.HandlerFunc {
+	return func(gc *gin.Context) {
+
+		var stockout []domain.Stockout
+
+		file, _ := gc.FormFile("stockoutimport")
+		dst := "./csv/"+ file.Filename
+		gc.SaveUploadedFile(file, dst)
+		// csvfile, err := os.Open("./csv/import_stock.csv")
+		csvfile, err := os.Open("./csv/"+file.Filename)
+		if err != nil {
+			gc.JSON(http.StatusBadRequest, gin.H{
+				"status": false,
+				"message": "error opening file, check file again",
+			})
+		}
+
+
+		reader := csv.NewReader(bufio.NewReader(csvfile))
+		for {
+			line, error := reader.Read()
+			if error == io.EOF {
+				break
+			} else if error != nil {
+				gc.JSON(http.StatusBadRequest, gin.H{
+					"status": false,
+					"message": "something's wrong!",
+				})
+			}
+
+			stockoutoutamount, _ := strconv.Atoi(line[4])
+			stockoutsaleprice, _ := strconv.Atoi(line[5])    
+    		stockouttotal, _ := strconv.Atoi(line[6])
+			stockout = append(stockout, domain.Stockout{
+				Timestamp: line[1],  // start from timestamp column as we ignore id column(assume the csv include the IDs)
+				Sku: line[2],
+				Name: line[3],
+				OutAmount: stockoutoutamount,
+				SalePrice: stockoutsaleprice,
+				Total: stockouttotal,
+				Note: line[7],
+			})
+		}
+
+		if len(stockout) > 0 {
+			for i:=0; i<len(stockout); i++ {
+				db.RemoveProduct(&stockout[i])
+			}
+			gc.JSON(http.StatusOK, gin.H{
+				"status": true,
+				"message": "data csv migrated successfully to stockout table",
+				"data": stockout,
+			})
+			return
+
+		} else {
+			gc.JSON(http.StatusBadRequest, gin.H{
+				"status": false,
+				"message": "error reading csv file, check file again for correct format!",
+			})
+			return
+
+		}
+
+		gc.JSON(http.StatusBadRequest, gin.H{
+			"status": false,
+			"message": "something's wrong!",
+		})
+		return
+
 	}
 }

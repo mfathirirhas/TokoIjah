@@ -13,7 +13,8 @@
 				"0a3aa5d6-76ef-c86f-7a2f-3b3cfa93ef48",
 				"81db9adf-43f8-e49f-7c3c-5a406a59f5ad",
 				"8b697a4e-7439-2cdc-179a-67018acbc1c3",
-				"d0af1ec4-7645-9274-4ea9-270480149422"
+				"d0af1ec4-7645-9274-4ea9-270480149422",
+				"f42323da-1cf3-e832-ba69-0f9b5d360fad"
 			],
 			"owner": 0,
 			"folders_order": [],
@@ -30,7 +31,8 @@
 				"15f25772-c801-3f76-96c2-b4d4a51668eb",
 				"19b46681-3edc-257a-456b-8ec979f32be2",
 				"486c2c6c-e91f-c3e3-e287-f881a4ff9bb6",
-				"b30475e6-e458-02b1-3c51-dbbc17d1d49b"
+				"b30475e6-e458-02b1-3c51-dbbc17d1d49b",
+				"8cc88edc-5a9b-4073-c330-9cb405b8d099"
 			],
 			"owner": 0,
 			"folders_order": [],
@@ -45,7 +47,8 @@
 				"29e1dd90-1c13-72e7-086d-f5729eec8037",
 				"8e2fc69d-3d26-7d99-6387-c919b1a5cf0a",
 				"42d3485c-01d8-0b73-32d1-72d1ad0f0267",
-				"a82ffeec-7a68-be22-632c-7df880e43c66"
+				"a82ffeec-7a68-be22-632c-7df880e43c66",
+				"ba4f370a-e425-d8e1-3f66-39a140c849dd"
 			],
 			"owner": 0,
 			"folders_order": [],
@@ -60,7 +63,8 @@
 				"d44ab259-754e-f061-1e51-e40867de10d1",
 				"f951fb8a-54c9-7591-14d9-7f67a00f0635",
 				"e741ef25-422c-4a5c-949d-1f0217401be8",
-				"db346d93-ac92-ec2f-6f69-de22898f3806"
+				"db346d93-ac92-ec2f-6f69-de22898f3806",
+				"6a66ab6d-1c1d-1042-16eb-5f232fd01256"
 			],
 			"owner": 0,
 			"folders_order": [],
@@ -78,6 +82,7 @@
 				"f49a52f3-e7f6-5a9c-4b32-6b666e3d05de",
 				"e94922d1-fd01-3901-5e68-187cee9bce0a",
 				"5c8d1991-0d0a-2f36-555d-c6b0cd0b6d73",
+				"09724526-d559-ad03-5f6e-8a1d56516554",
 				"289b118d-590c-1098-6b88-6a359987f5dc"
 			],
 			"owner": 0,
@@ -100,6 +105,38 @@
 	"variables": [],
 	"auth": null,
 	"requests": [
+		{
+			"id": "09724526-d559-ad03-5f6e-8a1d56516554",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/stockvalueimport",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "POST",
+			"collectionId": "0ae11204-8653-8ab9-37de-86f2152d78d3",
+			"data": [
+				{
+					"key": "stockvalueimport",
+					"value": "",
+					"description": "import csv to stockvalue table",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "StockvalueImport",
+			"description": "import csv data to stockvalue table. check data format in csv file.",
+			"descriptionFormat": "html",
+			"time": 1517540260178,
+			"version": 2,
+			"responses": [],
+			"folder": "49d4414d-2bc5-77c9-6d39-9982941b6510",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
 		{
 			"id": "0a3aa5d6-76ef-c86f-7a2f-3b3cfa93ef48",
 			"headers": "",
@@ -328,6 +365,38 @@
 			"helperAttributes": null
 		},
 		{
+			"id": "6a66ab6d-1c1d-1042-16eb-5f232fd01256",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/stockoutimport",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "POST",
+			"collectionId": "0ae11204-8653-8ab9-37de-86f2152d78d3",
+			"data": [
+				{
+					"key": "stockoutimport",
+					"value": "",
+					"description": "import csv to stockout table",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "StockoutImport",
+			"description": "import csv file to stockout table. Check data format in csv file.",
+			"descriptionFormat": "html",
+			"time": 1517536155408,
+			"version": 2,
+			"responses": [],
+			"folder": "c09d8675-5c7c-3419-1319-5068106f91de",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
 			"id": "81db9adf-43f8-e49f-7c3c-5a406a59f5ad",
 			"headers": "",
 			"headerData": [],
@@ -372,6 +441,38 @@
 			"version": 2,
 			"responses": [],
 			"folder": "ff4bceb6-c879-2807-63a3-c07016db8e60",
+			"currentHelper": null,
+			"helperAttributes": null
+		},
+		{
+			"id": "8cc88edc-5a9b-4073-c330-9cb405b8d099",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/stockimport",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "POST",
+			"collectionId": "0ae11204-8653-8ab9-37de-86f2152d78d3",
+			"data": [
+				{
+					"key": "stockimport",
+					"value": "",
+					"description": "csv file to import to stock table",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "StockImport",
+			"description": "import a csv file to stock(check the columns carefully)",
+			"descriptionFormat": "html",
+			"time": 1517518251473,
+			"version": 2,
+			"responses": [],
+			"folder": "fdbff030-98aa-7e7e-e6a2-bcba1d08ab9a",
 			"currentHelper": null,
 			"helperAttributes": null
 		},
@@ -537,6 +638,38 @@
 			"currentHelper": null,
 			"helperAttributes": null,
 			"rawModeData": "{\n\t\"orderid\": \"ORD-A001\",\n\t\"sku\": \"A001\",\n\t\"name\": \"Polo Shirt Red\",\n\t\"amount\": 3,\n\t\"saleprice\": 120000\n}"
+		},
+		{
+			"id": "ba4f370a-e425-d8e1-3f66-39a140c849dd",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/stockinimport",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "POST",
+			"collectionId": "0ae11204-8653-8ab9-37de-86f2152d78d3",
+			"data": [
+				{
+					"key": "stockinimport",
+					"value": "",
+					"description": "import csv file to stockin table\n",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "StockinImport",
+			"description": "Import csv file to stockin table(check data format carefull in csv file)",
+			"descriptionFormat": "html",
+			"time": 1517534931606,
+			"version": 2,
+			"responses": [],
+			"folder": "c142a7e9-c5ad-0df7-9207-7463e96e805c",
+			"currentHelper": null,
+			"helperAttributes": null
 		},
 		{
 			"id": "c47b4de8-662d-86f7-6290-160761afd129",
@@ -734,6 +867,38 @@
 			"currentHelper": null,
 			"helperAttributes": null,
 			"rawModeData": "{\n\t\"sku\": \"A-002\",\n\t\"name\": \"Polo Shirt Orange\",\n\t\"amount\": 60,\n\t\"buyingprice\": 60000\n}"
+		},
+		{
+			"id": "f42323da-1cf3-e832-ba69-0f9b5d360fad",
+			"headers": "",
+			"headerData": [],
+			"url": "localhost:8080/salereportimport",
+			"queryParams": [],
+			"pathVariables": {},
+			"pathVariableData": [],
+			"events": [],
+			"auth": null,
+			"method": "POST",
+			"collectionId": "0ae11204-8653-8ab9-37de-86f2152d78d3",
+			"data": [
+				{
+					"key": "salereportimport",
+					"value": "",
+					"description": "import csv to salereport table",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "SalereportImport",
+			"description": "import csv data to salereport table. check data format in csv file",
+			"descriptionFormat": "html",
+			"time": 1517537719317,
+			"version": 2,
+			"responses": [],
+			"folder": "ff4bceb6-c879-2807-63a3-c07016db8e60",
+			"currentHelper": null,
+			"helperAttributes": null
 		},
 		{
 			"id": "f49a52f3-e7f6-5a9c-4b32-6b666e3d05de",
