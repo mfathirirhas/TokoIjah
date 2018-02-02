@@ -7,6 +7,8 @@ import (
 	"strconv"
 	"math"
 	"encoding/csv"
+	"io"
+	"bufio"
 	_ "fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/mfathirirhas/TokoIjah/domain"
@@ -265,6 +267,87 @@ func GenerateStockValue(db domain.IStockvalue, dbstock domain.IStock, dbstockin 
 		return
 	}
 }
+
+func StockvalueImportCSV(db domain.IStockvalue) gin.HandlerFunc {
+	return func(gc *gin.Context) {
+
+		var stockvalue []domain.Stockvalue
+
+		file, _ := gc.FormFile("stockvalueimport")
+		dst := "./csv/"+ file.Filename
+		gc.SaveUploadedFile(file, dst)
+		// csvfile, err := os.Open("./csv/import_stock.csv")
+		csvfile, err := os.Open("./csv/"+file.Filename)
+		if err != nil {
+			gc.JSON(http.StatusBadRequest, gin.H{
+				"status": false,
+				"message": "error opening file, check file again",
+			})
+		}
+
+
+		reader := csv.NewReader(bufio.NewReader(csvfile))
+		for {
+			line, error := reader.Read()
+			if error == io.EOF {
+				break
+			} else if error != nil {
+				gc.JSON(http.StatusBadRequest, gin.H{
+					"status": false,
+					"message": "something's wrong!",
+				})
+			}
+
+			stockvalueamount, _ := strconv.Atoi(line[3])
+			stockvaluebuyingprice, _ := strconv.Atoi(line[4])
+			stockvaluetotal, _ := strconv.Atoi(line[5])
+			stockvalue = append(stockvalue, domain.Stockvalue{
+				Sku: line[1],  // start from sku column as we ignore id column(assume the csv include the IDs)
+				Name: line[2],
+				Amount: stockvalueamount,
+				BuyingPrice: stockvaluebuyingprice,
+				Total: stockvaluetotal,
+			})
+		}
+
+		if len(stockvalue) > 0 {
+			for i:=0; i<len(stockvalue); i++ {
+				var tableStockvalue domain.Stockvalue
+				tableStockvalue = db.GetStockValuesBySku(stockvalue[i].Sku)
+				if tableStockvalue.Sku != "" { // data already exist in stock table, update the data then
+					tableStockvalue.Name = stockvalue[i].Name
+					tableStockvalue.Amount += stockvalue[i].Amount
+					tableStockvalue.BuyingPrice = stockvalue[i].BuyingPrice
+					tableStockvalue.Total = stockvalue[i].Total
+					updatedStockvalue := db.UpdateStockValue(tableStockvalue)
+					_ = updatedStockvalue // LOL
+				} else { // data didn't exist in table, create new one then
+					db.CreateStockValue(&stockvalue[i])
+				}
+			}
+			gc.JSON(http.StatusOK, gin.H{
+				"status": true,
+				"message": "data csv migrated successfully to stockvalue table",
+				"data": stockvalue,
+			})
+			return
+
+		} else {
+			gc.JSON(http.StatusBadRequest, gin.H{
+				"status": false,
+				"message": "error reading csv file, check file again for correct format!",
+			})
+			return
+
+		}
+
+		gc.JSON(http.StatusBadRequest, gin.H{
+			"status": false,
+			"message": "something's wrong!",
+		})
+		return
+	}
+} 
 
 // Round Go convert float to int without checking the round up/down value, it will always round down, hence we need this function
 func Round(val float64, roundOn float64, places int ) (newVal float64) {
