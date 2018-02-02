@@ -71,5 +71,6 @@ func setRoutes(db *model.DB, r *gin.Engine) {
 	// import to csv
 	r.POST("/stockimport", StockImportCSV(db))
 	r.POST("/stockinimport", StockinImportCSV(db))
+	r.POST("/stockoutimport", StockoutImportCSV(db))
 }
 
